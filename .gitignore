@@ -136,3 +136,5 @@ dist
 
 build/
 .idea
+
+inputs/
