@@ -19,4 +19,27 @@ describe('On Day 6', () => {
   it('part2 is identity function', () => {
     expect(day6.solveForPartTwo(testInput)).toBe('6')
   })
+
+  const testInput2 = '..#.\n' +
+      '...#\n' +
+      '..^.'
+  it('part2 is identity function', () => {
+    expect(day6.solveForPartTwo(testInput2)).toBe('2')
+  })
+
+  const testInput3 = '.#.\n' +
+      '#.#\n' +
+      '#^.\n' +
+      '...'
+  it('part2 is identity function', () => {
+    expect(day6.solveForPartTwo(testInput3)).toBe('2')
+  })
+
+  const testInput4 = '.#.\n' +
+      '..#\n' +
+      '#^.\n' +
+      '...'
+  it('part2 is identity function', () => {
+    expect(day6.solveForPartTwo(testInput4)).toBe('2')
+  })
 })
