@@ -82,36 +82,60 @@ class Day6 extends Day {
       }
     }
 
-    const walkingPath = visitedMatrix.flat(3).filter(cell => cell.step !== -1).sort((a, b) => b.step - a.step)
-    // console.log(walkingPath)
+    const walkingPath = visitedMatrix.flat(3).filter(cell => cell.step !== -1).sort((a, b) => a.step - b.step)
 
     const obstPositions: {x: number, y: number}[] = []
-    for (let i = 0; i < walkingPath.length - 1; i++) {
-      const localPos = walkingPath[i].pos
-      const localDir = walkingPath[i].dir
-      const newDir = directions[(directions.indexOf(localDir) + 1) % 4]
 
-      if (matrix[localPos.y + localDir.y][localPos.x + localDir.x] === 'W' || matrix[localPos.y + localDir.y][localPos.x + localDir.x] === '#') {
+    for (let i = 0; i < walkingPath.length - 1; i++) {
+      const futureObstPos = walkingPath[i + 1].pos
+      if (obstPositions.includes(futureObstPos)) {
         continue
       }
 
-      let tempPos = { x: localPos.x, y: localPos.y }
+      const localMatrix = JSON.parse(JSON.stringify(matrix))
+      if (futureObstPos.x !== startX || futureObstPos.y !== startY) {
+        localMatrix[futureObstPos.y][futureObstPos.x] = '#'
+      } else {
+        continue
+      }
+
+      const localVisited: { step: number, dir: {x: number, y: number}, pos: {x: number, y: number} }[][][] = Array(localMatrix.length)
+        .fill(null)
+        .map(() =>
+          Array(localMatrix[0].length).fill(null).map(() => [])
+        )
+
+      let localDir = directions[0]
+      let localPos = { x: startX, y: startY }
+      let localStep = 0
       while (true) {
-        tempPos = {
-          x: tempPos.x + newDir.x,
-          y: tempPos.y + newDir.y
+        if (!localVisited[localPos.y][localPos.x].some(cell => cell.dir.x === localDir.x && cell.dir.y === localDir.y)) {
+          localVisited[localPos.y][localPos.x].push({ step: localStep++, dir: localDir, pos: localPos })
         }
 
-        if (matrix[tempPos.y][tempPos.x] === 'W' || matrix[tempPos.y][tempPos.x] === '#') {
+        if (localMatrix[localPos.y + localDir.y][localPos.x + localDir.x] === 'W') {
           break
         }
 
-        if (visitedMatrix[tempPos.y][tempPos.x].some(cell => cell.dir === newDir && cell.step < walkingPath[i].step)) {
-          const localObstPos = { x: localPos.x + localDir.x, y: localPos.y + localDir.y }
-          if (!obstPositions.some(cell => cell.x === localObstPos.x && cell.y === localObstPos.y)) {
-            obstPositions.push({ x: localPos.x + localDir.x, y: localPos.y + localDir.y })
+        if (localMatrix[localPos.y + localDir.y][localPos.x + localDir.x] === '#') {
+          localDir = directions[(directions.indexOf(localDir) + 1) % 4]
+          if (!localVisited[localPos.y][localPos.x].some(cell => cell.dir.x === localDir.x && cell.dir.y === localDir.y)) {
+            localVisited[localPos.y][localPos.x].push({ step: localStep++, dir: localDir, pos: localPos })
+          }
+        }
+
+        if (localVisited[localPos.y + localDir.y][localPos.x + localDir.x].some(cell => cell.dir.x === localDir.x && cell.dir.y === localDir.y)) {
+          if (!obstPositions.some(elem => elem.x === futureObstPos.x && elem.y === futureObstPos.y)) {
+            obstPositions.push(futureObstPos)
           }
           break
+        }
+
+        if (localMatrix[localPos.y + localDir.y][localPos.x + localDir.x] === '.' || localMatrix[localPos.y + localDir.y][localPos.x + localDir.x] === 'X') {
+          localPos = {
+            x: localPos.x + localDir.x,
+            y: localPos.y + localDir.y
+          }
         }
       }
     }
