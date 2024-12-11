@@ -23,7 +23,7 @@ class Day9 extends Day {
     super(9)
   }
 
-  solveForPartOne (input: string): string {
+  solveForPartOne (input: string): number {
     const parsedNums = this.parseInput(input)
 
     let i = 0
@@ -46,10 +46,10 @@ class Day9 extends Day {
 
     const result = parsedNums.filter(num => num !== -1).reduce((acc, num, index) => acc + num * index, 0)
 
-    return result.toString()
+    return result
   }
 
-  solveForPartTwo (input: string): string {
+  solveForPartTwo (input: string): number {
     const disk = this.parseInputToDisk(input)
 
     let freeSpaceIndex = 0
@@ -131,7 +131,7 @@ class Day9 extends Day {
       }
     })
 
-    return result.toString()
+    return result
   }
 
   parseInput (input: string): number[] {

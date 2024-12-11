@@ -12,7 +12,7 @@ class Day6 extends Day {
     super(6)
   }
 
-  solveForPartOne (input: string): string {
+  solveForPartOne (input: string): number {
     const matrix = this.parseInput(input)
 
     const startY = matrix.findIndex(row => row.includes('^'))
@@ -38,12 +38,12 @@ class Day6 extends Day {
     }
 
     const result = matrix.reduce((acc, row) => acc + row.filter(cell => cell === 'X').length, 0)
-    return result.toString()
+    return result
   }
 
   // 422 wrong answer
   // 423 wrong answer
-  solveForPartTwo (input: string): string {
+  solveForPartTwo (input: string): number {
     const matrix = this.parseInput(input)
     const visitedMatrix: { step: number, dir: {x: number, y: number}, pos: {x: number, y: number} }[][][] = Array(matrix.length)
       .fill(null)
@@ -141,7 +141,7 @@ class Day6 extends Day {
     }
 
     const result = obstPositions.length
-    return result.toString()
+    return result
   }
 
   parseInput (input: string): string[][] {

@@ -9,7 +9,7 @@ class Day11 extends Day {
     this.memoizedBlinkRecursive = memo(this.blinkRecursive.bind(this))
   }
 
-  solveForPartOne (input: string): string {
+  solveForPartOne (input: string): number {
     const numbers = parseLineOfNumbers(input)
 
     let current = numbers
@@ -17,10 +17,10 @@ class Day11 extends Day {
       current = current.flatMap((num: number) => this.blink(num))
     }
 
-    return current.length.toString()
+    return current.length
   }
 
-  solveForPartTwo (input: string): string {
+  solveForPartTwo (input: string): number {
     const numbers = parseLineOfNumbers(input)
 
     let result = 0
@@ -28,7 +28,7 @@ class Day11 extends Day {
       result += this.memoizedBlinkRecursive(num, 0, 75)
     }
 
-    return result.toString()
+    return result
   }
 
   blink (num: number): number[] {

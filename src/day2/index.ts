@@ -5,7 +5,7 @@ class Day2 extends Day {
     super(2)
   }
 
-  solveForPartOne (input: string): string {
+  solveForPartOne (input: string): number {
     const reports = input.split('\n')
 
     let isSafe = 0
@@ -18,11 +18,11 @@ class Day2 extends Day {
       }
     }
 
-    return isSafe.toString()
+    return isSafe
   }
 
   // 426 wrong
-  solveForPartTwo (input: string): string {
+  solveForPartTwo (input: string): number {
     const reports = input.split('\n')
 
     let isSafe = 0
@@ -51,7 +51,7 @@ class Day2 extends Day {
       }
     }
 
-    return isSafe.toString()
+    return isSafe
   }
 }
 

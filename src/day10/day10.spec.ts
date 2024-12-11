@@ -16,14 +16,14 @@ const testInput2 = '0123\n' +
 
 describe('On Day 10', () => {
   it('part1 is identity function', () => {
-    expect(day10.solveForPartOne(testInput)).toBe('36')
+    expect(day10.solveForPartOne(testInput)).toBe(36)
   })
 
   it('part1 test 2', () => {
-    expect(day10.solveForPartOne(testInput2)).toBe('1')
+    expect(day10.solveForPartOne(testInput2)).toBe(1)
   })
 
   it('part2 is identity function', () => {
-    expect(day10.solveForPartTwo(testInput)).toBe('81')
+    expect(day10.solveForPartTwo(testInput)).toBe(81)
   })
 })

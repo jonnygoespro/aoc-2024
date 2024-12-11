@@ -1,18 +1,17 @@
-import { Day } from "../day";
+import { Day } from '../day'
 
 class Day0 extends Day {
+  constructor () {
+    super(0)
+  }
 
-    constructor(){
-        super(0);
-    }
+  solveForPartOne (input: string): number {
+    return input.length
+  }
 
-    solveForPartOne(input: string): string {
-        return input;
-    }
-
-    solveForPartTwo(input: string): string {
-        return input;
-    }
+  solveForPartTwo (input: string): number {
+    return input.length
+  }
 }
 
-export default new Day0;
+export default new Day0()

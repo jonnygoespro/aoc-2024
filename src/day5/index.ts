@@ -5,7 +5,7 @@ class Day5 extends Day {
     super(5)
   }
 
-  solveForPartOne (input: string): string {
+  solveForPartOne (input: string): number {
     const { rules, updates } = this.parseInput(input)
 
     const correctUpdates = updates.filter(update => {
@@ -22,10 +22,10 @@ class Day5 extends Day {
       return acc + update[Math.floor(update.length / 2)]
     }, 0)
 
-    return result.toString()
+    return result
   }
 
-  solveForPartTwo (input: string): string {
+  solveForPartTwo (input: string): number {
     const { rules, updates } = this.parseInput(input)
 
     const incorrectUpdates = updates.filter(update => {
@@ -65,7 +65,7 @@ class Day5 extends Day {
       return acc + update[Math.floor(update.length / 2)]
     }, 0)
 
-    return result.toString()
+    return result
   }
 
   parseInput (input: string) {

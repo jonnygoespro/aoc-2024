@@ -17,7 +17,7 @@ class Day10 extends Day {
     super(10)
   }
 
-  solveForPartOne (input: string): string {
+  solveForPartOne (input: string): number {
     const map = this.parseInput(input)
     let result = 0
     for (let y = 0; y < map.length; y++) {
@@ -29,10 +29,10 @@ class Day10 extends Day {
         result += this.breadthFirstSearch(map, { x, y, value: 0 })
       }
     }
-    return result.toString()
+    return result
   }
 
-  solveForPartTwo (input: string): string {
+  solveForPartTwo (input: string): number {
     const map = this.parseInput(input)
     let result = 0
     for (let y = 0; y < map.length; y++) {
@@ -44,7 +44,7 @@ class Day10 extends Day {
         result += this.breadthFirstSearch(map, { x, y, value: 0 }, false)
       }
     }
-    return result.toString()
+    return result
   }
 
   parseInput (input: string): number[][] {

@@ -31,10 +31,10 @@ const testInput = '47|53\n' +
 
 describe('On Day 5', () => {
   it('part1 is identity function', () => {
-    expect(day5.solveForPartOne(testInput)).toBe('143')
+    expect(day5.solveForPartOne(testInput)).toBe(143)
   })
 
   it('part2 is identity function', () => {
-    expect(day5.solveForPartTwo(testInput)).toBe('123')
+    expect(day5.solveForPartTwo(testInput)).toBe(123)
   })
 })

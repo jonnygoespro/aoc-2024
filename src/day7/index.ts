@@ -10,20 +10,20 @@ class Day7 extends Day {
     super(7)
   }
 
-  solveForPartOne (input: string): string {
+  solveForPartOne (input: string): number {
     const operations = this.parseInput(input)
 
     const correctOperations = operations.filter(operation => this.multiplyAddRecursive(operation, 1, operation.parameters[0]))
     const result = correctOperations.reduce((acc, operation) => acc + operation.result, 0)
-    return result.toString()
+    return result
   }
 
-  solveForPartTwo (input: string): string {
+  solveForPartTwo (input: string): number {
     const operations = this.parseInput(input)
 
     const correctOperations = operations.filter(operation => this.multiplyAddOrRecursive(operation, 1, operation.parameters[0]))
     const result = correctOperations.reduce((acc, operation) => acc + operation.result, 0)
-    return result.toString()
+    return result
   }
 
   private parseInput (input: string): Operation[] {

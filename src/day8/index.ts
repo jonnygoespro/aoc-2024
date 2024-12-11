@@ -13,7 +13,7 @@ class Day8 extends Day {
     super(8)
   }
 
-  solveForPartOne (input: string): string {
+  solveForPartOne (input: string): number {
     const antiNodes = this.getEmptyAntiNodes(input)
     const antennas = this.parseInput(input)
     const uniqueFrequencies = this.getUniqueFrequencies(antennas)
@@ -60,10 +60,10 @@ class Day8 extends Day {
     })
 
     const result = antiNodes.flat(2).filter(antiNode => antiNode === '#').length
-    return result.toString()
+    return result
   }
 
-  solveForPartTwo (input: string): string {
+  solveForPartTwo (input: string): number {
     const antiNodes = this.getEmptyAntiNodes(input)
     const antennas = this.parseInput(input)
     const uniqueFrequencies = this.getUniqueFrequencies(antennas)
@@ -116,7 +116,7 @@ class Day8 extends Day {
     })
 
     const result = antiNodes.flat(2).filter(antiNode => antiNode === '#').length
-    return result.toString()
+    return result
   }
 
   parseInput (input: string): Antenna[] {

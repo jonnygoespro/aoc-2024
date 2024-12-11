@@ -5,7 +5,7 @@ class Day3 extends Day {
     super(3)
   }
 
-  solveForPartOne (input: string): string {
+  solveForPartOne (input: string): number {
     const multipliers = input.match(/mul\(([1-9][0-9][0-9]|[1-9][0-9]|[0-9]),([1-9][0-9][0-9]|[1-9][0-9]|[0-9])\)/g)
     const numbers = multipliers?.map((multiplier) => multiplier.replace('mul(', '').replace(')', ''))
     const result = numbers?.reduce((acc, curr) => {
@@ -13,14 +13,14 @@ class Day3 extends Day {
       return acc + parseInt(a) * parseInt(b)
     }, 0)
 
-    return result?.toString() ?? '0'
+    return result ?? 0
   }
 
-  solveForPartTwo (input: string): string {
+  solveForPartTwo (input: string): number {
     const multipliers = input.match(/(mul\(([1-9][0-9][0-9]|[1-9][0-9]|[0-9]),([1-9][0-9][0-9]|[1-9][0-9]|[0-9])\))|(do\(\))|(don't\(\))/g)
 
     if (!multipliers) {
-      return '0'
+      return 0
     }
 
     let enabled = true
@@ -42,7 +42,7 @@ class Day3 extends Day {
         result += parseInt(a) * parseInt(b)
       }
     }
-    return result.toString()
+    return result
   }
 }
 

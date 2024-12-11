@@ -12,15 +12,15 @@ const testInput = '190: 10 19\n' +
 
 describe('On Day 7', () => {
   it('part1 is identity function', () => {
-    expect(day7.solveForPartOne(testInput)).toBe('3749')
+    expect(day7.solveForPartOne(testInput)).toBe(3749)
   })
 
   it('part2 is identity function', () => {
-    expect(day7.solveForPartTwo(testInput)).toBe('11387')
+    expect(day7.solveForPartTwo(testInput)).toBe(11387)
   })
 
   const anotherTest = '3: 1 2 1000'
   it('part2 another test', () => {
-    expect(day7.solveForPartTwo(anotherTest)).toBe('0')
+    expect(day7.solveForPartTwo(anotherTest)).toBe(0)
   })
 })

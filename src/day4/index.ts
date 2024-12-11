@@ -5,7 +5,7 @@ class Day4 extends Day {
     super(4)
   }
 
-  solveForPartOne (input: string): string {
+  solveForPartOne (input: string): number {
     const matrix = input.split('\n').map(row => row.split(''))
 
     let result = 0
@@ -87,10 +87,10 @@ class Day4 extends Day {
       }
     }
 
-    return result.toString()
+    return result
   }
 
-  solveForPartTwo (input: string): string {
+  solveForPartTwo (input: string): number {
     const matrix = input.split('\n').map(row => row.split(''))
 
     let result = 0
@@ -111,7 +111,7 @@ class Day4 extends Day {
       }
     }
 
-    return result.toString()
+    return result
   }
 }
 

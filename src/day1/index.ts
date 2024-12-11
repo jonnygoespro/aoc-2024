@@ -5,7 +5,7 @@ class Day1 extends Day {
     super(1)
   }
 
-  solveForPartOne (input: string): string {
+  solveForPartOne (input: string): number {
     const lines = input.split('\n')
     lines.map((line) =>
       line.split(/\s+/)
@@ -20,10 +20,10 @@ class Day1 extends Day {
       result += Math.abs(column1[i] - column2[i])
     }
 
-    return result.toString()
+    return result
   }
 
-  solveForPartTwo (input: string): string {
+  solveForPartTwo (input: string): number {
     const lines = input.split('\n')
     lines.map((line) =>
       line.split('   ')
@@ -49,7 +49,7 @@ class Day1 extends Day {
       }
     }
 
-    return result.toString()
+    return result
   }
 }
 
