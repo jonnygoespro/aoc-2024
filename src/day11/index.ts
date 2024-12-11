@@ -1,5 +1,5 @@
 import { Day } from '../day'
-import { parseLineOfNumbers } from '../utils'
+import { parseLineOfNumbers, memo } from '../utils'
 
 class Day11 extends Day {
   private readonly memoizedBlinkRecursive: (num: number, result: number, depth: number) => number
@@ -70,19 +70,3 @@ class Day11 extends Day {
 }
 
 export default new Day11()
-
-function memo<T extends unknown[], A> (fn: (...args: T) => A) {
-  const cache = new Map()
-
-  return function (...args: T) {
-    const key = args.map((arg) => `${arg}_${typeof arg}`).join('|')
-
-    if (cache.has(key)) {
-      return cache.get(key)
-    }
-    const result = fn(...args)
-
-    cache.set(key, result)
-    return result
-  }
-}
