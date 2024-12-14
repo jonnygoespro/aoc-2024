@@ -138,3 +138,6 @@ build/
 .idea
 
 inputs/
+
+renders/
+.DS_Store
