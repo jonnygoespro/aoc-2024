@@ -1,6 +1,7 @@
 import { Day } from '../day'
 import { directions, getNeighbors, parseMatrixOfChars } from '../utils'
-import { sec } from 'mathjs'
+
+type Distances = Map<string, number>
 
 type Position = {
     x: number
@@ -67,7 +68,7 @@ class Day20 extends Day {
     }
 
     const filteredPaths = Array.from(allPaths.entries()).filter(([key, value]) => value <= ogDistance - 100)
-    console.log('Filtered Paths: ', filteredPaths.length)
+    // console.log('Filtered Paths: ', filteredPaths.length)
     // const groupedPaths = Array.from(allPaths.values()).reduce((acc, cur) => {
     //   if (!acc[cur]) {
     //     acc[cur] = 1
@@ -83,7 +84,66 @@ class Day20 extends Day {
   }
 
   solveForPartTwo (input: string): number {
-    return input.length
+    const grid = input.split('\n').map(line => line.split(''))
+    const start = this.findStart(grid)
+    const distances = this.floodFill(grid, start)
+
+    let result = 0
+
+    const points = Array.from(distances.keys()).map(key => {
+      const [x, y] = key.split(',').map(Number)
+      return { x, y }
+    })
+
+    for (let i = 0; i < points.length; i++) {
+      for (let j = i + 1; j < points.length; j++) {
+        const p = points[i]
+        const q = points[j]
+        const d = this.manhattanDistance(p, q)
+        const di = distances.get(`${p.x},${p.y}`)!
+        const dj = distances.get(`${q.x},${q.y}`)!
+
+        if (d < 21 && dj - di - d >= 100) result++
+      }
+    }
+
+    return result
+  }
+
+  findStart (grid: string[][]): Position {
+    for (let y = 0; y < grid.length; y++) {
+      for (let x = 0; x < grid[y].length; x++) {
+        if (grid[y][x] === 'S') return { x, y }
+      }
+    }
+    throw new Error('Start not found')
+  }
+
+  floodFill (grid: string[][], start: Position): Distances {
+    const dist: Distances = new Map()
+    const queue: [Position, number][] = [[start, 0]]
+
+    while (queue.length > 0) {
+      const [current, distance] = queue.shift()!
+      const key = `${current.x},${current.y}`
+
+      if (dist.has(key)) continue
+      dist.set(key, distance)
+
+      for (const { x, y } of directions) {
+        const nx = current.x + x
+        const ny = current.y + y
+        if (nx >= 0 && nx < grid[0].length && ny >= 0 && ny < grid.length && grid[ny][nx] !== '#') {
+          queue.push([{ x: nx, y: ny }, distance + 1])
+        }
+      }
+    }
+
+    return dist
+  }
+
+  manhattanDistance (p: Position, q: Position): number {
+    return Math.abs(p.x - q.x) + Math.abs(p.y - q.y)
   }
 
   ogDijkstra (map: string[][], start: Position, end: Position): number {
