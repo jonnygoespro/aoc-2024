@@ -42,4 +42,12 @@ describe('On Day 21', () => {
   it('parses code3 to third robot', () => {
     expect(day21.solveForPartOne(code3)).toBe(29184)
   })
+
+  it('part2 runs with test codes', () => {
+    expect(day21.solveForPartTwo(code)).toBe(82050061710 * 29)
+  })
+
+  // it('part2 runs with test codes', () => {
+  //   expect(day21.solveForPartTwo(codes)).toBe(154115708116294)
+  // })
 })
