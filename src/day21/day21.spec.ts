@@ -1,7 +1,6 @@
 import day21 from './index'
 
 const code = '029A'
-const code2 = '379A'
 const code3 = '456A'
 
 const codes = '029A\n' +
