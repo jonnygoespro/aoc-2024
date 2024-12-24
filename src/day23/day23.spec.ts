@@ -39,6 +39,6 @@ describe('On Day 23', () => {
   })
 
   it('part2 runs with test input', () => {
-    expect(day23.solveForPartTwo('1')).toBe(1)
+    expect(day23.solveForPartTwo(testInput)).toBe('co,de,ka,ta')
   })
 })

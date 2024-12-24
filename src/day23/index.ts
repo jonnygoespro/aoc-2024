@@ -17,8 +17,10 @@ class Day23 extends Day {
     return filteredTriangles.length
   }
 
-  solveForPartTwo (input: string): number {
-    return input.length
+  solveForPartTwo (input: string): string {
+    const graph = this.createGraph(input)
+    const largestClique = this.findLargestClique(graph)
+    return [...largestClique].sort().join(',')
   }
 
   createGraph (input: string): Graph {
@@ -77,6 +79,48 @@ class Day23 extends Day {
     }
 
     return triangles
+  }
+
+  bronKerbosch (
+    R: Set<string>,
+    P: Set<string>,
+    X: Set<string>,
+    graph: Graph,
+    cliques: Set<string>[]
+  ): void {
+    if (P.size === 0 && X.size === 0) {
+      cliques.push(new Set(R))
+      return
+    }
+
+    const pivot = P.size > 0 ? [...P][0] : undefined
+    const neighbors = pivot ? new Set(graph.edges[pivot]) : new Set<string>()
+
+    for (const v of [...P].filter(v => !neighbors.has(v))) {
+      const neighborsV = new Set(graph.edges[v])
+      this.bronKerbosch(
+        new Set([...R, v]),
+        new Set([...P].filter(n => neighborsV.has(n))),
+        new Set([...X].filter(n => neighborsV.has(n))),
+        graph,
+        cliques
+      )
+      P.delete(v)
+      X.add(v)
+    }
+  }
+
+  findLargestClique (graph: Graph): Set<string> {
+    const allCliques: Set<string>[] = []
+    const R: Set<string> = new Set()
+    const P: Set<string> = new Set(graph.nodes)
+    const X: Set<string> = new Set()
+
+    this.bronKerbosch(R, P, X, graph, allCliques)
+
+    return allCliques.reduce((largest, clique) =>
+      clique.size > largest.size ? clique : largest, new Set()
+    )
   }
 }
 
